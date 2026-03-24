@@ -1,1 +1,85 @@
+
+// @import "material-theme.scss";
+
+
+
 /* You can add global styles to this file, and also import other style files */
+@import "styles-colors.scss";
+
+.header-background-color {
+    background-color: $background-color;
+}
+.list-ok {
+  list-style: none;
+  padding-left: 0;
+	margin-left: 0;
+}
+.list-ok li {
+	display: flex;
+  align-items: flex-start;
+  gap: 0.1em;
+  
+}
+.list-ok li::before {
+    content: "✔️"; 
+    margin-right: 0.5em;
+    flex-shrink: 0;
+    font-family: '-apple-system', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.custom-shadow {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.50) ;
+}
+body, 
+.entry-title {
+  // font-family: 'Arial', sans-serif !important;
+  color: #000;
+  font-size: 16px;
+}
+
+
+body a {
+  color: $link-color;
+  text-decoration: none;
+  :hover {
+    text-decoration: underline;
+  }
+}
+h1 {
+  margin-top: 1rem;
+  font-size: 32px;
+  margin-top: 1rem;
+}
+h2 {
+  font-size: 28px;
+  margin-top: 1rem;
+}
+h3 {
+  font-size: 20px;
+  margin-top: 1rem;
+}
+
+.brand {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+
+/* Page Transition Animations */
+
+::view-transition-old(root) {
+  animation: fadeOut 300ms ease-in;
+}
+::view-transition-new(root) {
+  animation: fadeIn 300ms ease-out;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

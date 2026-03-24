@@ -1,0 +1,50 @@
+<h1>Contactez moi !</h1>
+<!-- Message succès -->
+ @if (contactState() === 'DONE') {
+<div class="alert alert-success">Votre message a bien été envoyé. </div>
+ }
+
+<!-- Message erreur -->
+@if (contactState() === 'ERROR') {
+<app-error errorMessage="Une erreur est survenue. Veuillez réessayer."></app-error>
+}
+
+@if (contactState() === 'INITIAL' || contactState() === 'LOADING') {
+<mat-card appearance="raised">
+  <mat-card-content>
+    <form [formGroup]="contactForm" (ngSubmit)="submit()">
+
+      <!-- Nom  -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nom complet</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+
+      <!-- Message -->
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea matInput formControlName="message"></textarea>
+      </mat-form-field>
+
+      <!-- Submit button -->
+      @if (contactState() === 'INITIAL') {
+      <button mat-flat-button color="primary" type="submit">
+          Envoyer
+      </button>
+      }
+
+      <!-- Loader -->
+       @if (contactState() === 'LOADING') {
+      <mat-progress-spinner mode="indeterminate" diameter="20" strokeWidth="3"
+        aria-label="Loading..."></mat-progress-spinner>
+       }
+    </form>
+  </mat-card-content>
+</mat-card>
+}

@@ -1,0 +1,54 @@
+<div class="header-background-color">
+    <div class="container">
+        <nav class="navbar navbar-expand-md header-background-color">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+
+                <!-- Logo + Brand block -->
+                <div class="d-flex align-items-center gap-3">
+                    <a routerLink="/home">
+                        <img src="/assets/images/thatsME.png" alt="That's Me Logo" width="140" />
+                    </a>
+                    <a routerLink="/home">
+                        <div class="text-white">
+                            <div class="brand">That's Me !</div>
+                            <div>Michel Auclert Web Consulting</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Hamburger toggler -->
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Collapsible nav links -->
+                <div class="collapse navbar-collapse ms-5" id="mainNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-black" routerLink="/home">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Prestations web
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/developpement-front-end-angular">Développement front-end Angular</a></li>
+                                <li><a class="dropdown-item" href="/site-creation">Création de sites</a></li>
+                                <li><a class="dropdown-item" href="/audit-accessibility">Audit accessibilité</a></li>
+                                <li><a class="dropdown-item" href="/mise-en-conformite-accessibilite-wacg">Mise en conformité accessibilité WACG</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black" routerLink="/formation-action">Coaching formation site</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black" routerLink="/contact">Contactez-moi</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

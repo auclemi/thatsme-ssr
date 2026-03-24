@@ -1,0 +1,101 @@
+[
+    {
+        "id": 111,
+        "date": "2025-10-24T14:55:19",
+        "date_gmt": "2025-10-24T12:55:19",
+        "guid": {
+            "rendered": "http:\/\/localhost\/wp\/?page_id=111"
+        },
+        "modified": "2025-10-29T11:05:44",
+        "modified_gmt": "2025-10-29T10:05:44",
+        "slug": "creation-sites-internet",
+        "status": "publish",
+        "type": "page",
+        "link": "http:\/\/localhost\/wp\/creation-sites-internet\/",
+        "title": {
+            "rendered": "Cr\u00e9ation sites internet"
+        },
+        "content": {
+            "rendered": "<p>Des sites web professionnels, rapides et accessibles, livr\u00e9s cl\u00e9 en main. Id\u00e9al pour les PME, associations ou ind\u00e9pendants souhaitant une pr\u00e9sence en ligne efficace.<\/p>\n\n\n<ul class=\"wp-block-list list-ok\">\n<li class=\"list-ok\">Design responsive<\/li>\n\n\n\n<li>Optimisation SEO <\/li>\n\n\n\n<li>Accessibilit\u00e9 int\u00e9gr\u00e9e<\/li>\n\n\n\n<li>H\u00e9bergement et maintenance en option<\/li>\n<\/ul>\n\n\n\n<p><\/p>\n\n\n\n<p><\/p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Des sites web professionnels, rapides et accessibles, livr\u00e9s cl\u00e9 en main. Id\u00e9al pour les PME, associations ou ind\u00e9pendants souhaitant une pr\u00e9sence en ligne efficace.<\/p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "parent": 0,
+        "menu_order": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "meta": {
+            "footnotes": ""
+        },
+        "class_list": [
+            "post-111",
+            "page",
+            "type-page",
+            "status-publish"
+        ],
+        "_links": {
+            "self": [
+                {
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/pages\/111",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/pages"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/types\/page"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/users\/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/comments?post=111"
+                }
+            ],
+            "version-history": [
+                {
+                    "count": 12,
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/pages\/111\/revisions"
+                }
+            ],
+            "predecessor-version": [
+                {
+                    "id": 622,
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/pages\/111\/revisions\/622"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http:\/\/localhost\/wp\/wp-json\/wp\/v2\/media?parent=111"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https:\/\/api.w.org\/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    }
+]

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "test-ssr": {
+    "thatsme-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -30,9 +30,15 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              { "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css" },
+              "src/material-theme.scss",
+              "src/styles-colors.scss",
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -67,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "test-ssr:build:production"
+              "buildTarget": "thatsme-angular:build:production"
             },
             "development": {
-              "buildTarget": "test-ssr:build:development"
+              "buildTarget": "thatsme-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "test-ssr:build"
+            "buildTarget": "thatsme-angular:build"
           }
         },
         "test": {

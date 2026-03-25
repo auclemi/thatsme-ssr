@@ -27,7 +27,7 @@ export class WpComponent {
     this.slug = this.getSlug(this.router.url);
     this.page = toSignal(this.wp.page$, { initialValue: null });
     this.loading = toSignal(this.wp.loading$, { initialValue: false });
-    this.error = toSignal(this.wp.error$, { initialValue: null });
+    this.error = toSignal(this.wp.error$, { initialValue: false });
   }
   ngOnInit() {
     this.wp.loadBySlug(this.slug)

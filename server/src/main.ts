@@ -6,26 +6,43 @@ import { Request, Response } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+console.log('API routes are handled by NestJS');
 
-  // Instance Express sous-jacente
+  // CORS
+  app.enableCors({
+    origin: ['http://localhost:4200', 'http://localhost:3000'],
+    credentials: true,
+  });
+
   const expressApp = app.getHttpAdapter().getInstance();
 
-  // 1) Servir les assets Angular
-  const browserDist = join(process.cwd(), '../client/dist/browser');
+  // Assets Angular
+  const browserDist = join(__dirname, '../../client/dist/browser');
   expressApp.use(express.static(browserDist));
 
-  // 2) Charger le moteur SSR Angular
-  const angularServer = join(process.cwd(), '../client/dist/server/main.server.mjs');
+  // SSR Angular
+  const angularServer = join(__dirname, '../../client/dist/server/main.server.mjs');
   const { default: angularRender } = await import(angularServer);
 
-  // 3) Fallback SSR pour toutes les routes non-API
-  expressApp.get('*', async (req: Request, res: Response) => {
-    const html = await angularRender({
-      url: req.url,
-      document: '<!DOCTYPE html><html><head></head><body><app-root></app-root></body></html>',
-    });
+  // Laisser Nest gérer /api
+  expressApp.use('/api', (req, res, next) => next());
+  // SSR fallback
+  expressApp.get('*', async (req: Request, res: Response, next) => {
+    if (req.url.startsWith('/api')) {
+      return next(); // ne pas SSR les routes API
+    }
 
-    res.send(html);
+    try {
+      const html = await angularRender({
+        url: req.url,
+        document: '<!DOCTYPE html><html><head></head><body><app-root></app-root></body></html>',
+      });
+
+      res.send(html);
+    } catch (err) {
+      console.error('SSR error:', err);
+      res.status(500).send('SSR Error');
+    }
   });
 
   await app.listen(3000);
@@ -33,36 +50,3 @@ async function bootstrap() {
 }
 
 bootstrap();
-
-
-// import { NestFactory } from '@nestjs/core';
-// import { AppModule } from './app.module';
-// import { join } from 'path';
-// import { ExpressAdapter } from '@nestjs/platform-express';
-// import express from 'express';
-
-// async function bootstrap() {
-//   const server = express();
-
-//   // IMPORTANT : ExpressAdapter ici
-//   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
-
-//   // Fichiers Angular (CSR)
-//   app.useStaticAssets(join(__dirname, '..', 'dist-angular/browser'));
-
-//   // Angular SSR engine
-//   const { ɵserverAppEngine } = await import('../dist-angular/server/server.mjs');
-
-//   app.engine('html', ɵserverAppEngine());
-//   app.setViewEngine('html');
-
-//   // SSR fallback
-//   server.get('*', (req, res) => {
-//     res.render('index', { req });
-//   });
-
-//   await app.listen(3000);
-//   console.log('SSR Nest + Angular running on http://localhost:3000');
-// }
-
-// bootstrap();

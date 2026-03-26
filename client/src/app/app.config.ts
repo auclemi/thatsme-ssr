@@ -8,9 +8,11 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(),
-  provideHttpClient(),
-  provideNoopAnimations()
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    provideNoopAnimations(),
+    provideClientHydration()
 
   ]
 };

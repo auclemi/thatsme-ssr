@@ -4,8 +4,8 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
-    "build:ssr": "ng build && ng run thatsme-angular:server",
-    "serve:ssr:thatsme-angular": "node dist/server/server.mjs"
+    "build:production": "ng build --configuration production",
+    "serve:ssr": "node dist/thatsme-angular/server/server.mjs"
     
   },
   "private": true,

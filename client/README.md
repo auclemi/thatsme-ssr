@@ -33,11 +33,11 @@ start: ng serve
 build: ng build  
 → Build de la version client (SPA).
 
-build:ssr: ng build && ng run thatsme-angular:server  
-→ Build complet : client + serveur SSR.
+build:production: ng build --configuration production  
+→ Build production (same as build if defaultConfiguration on angular.json is 'production')
 
 serve:ssr: node dist/thatsme-angular/server/server.mjs  
-→ Lance l’application en mode SSR (production).
+→ Lance l’application en mode SSR (production) sur le port 80.
 
 ## Scripts Nest side
 start: nest start

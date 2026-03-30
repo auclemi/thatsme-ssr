@@ -2,12 +2,15 @@
   <app-error [errorMessage]="error()"></app-error>
 }
 
-@if (loading()) {
-<app-loader />
+@if (!error() && loading()) {
+  <app-loader />
 }
 
-@if (page()) {
-    <h1 [innerHTML]="page()?.title?.rendered"></h1>
-    <div [innerHTML]="page()?.content?.rendered"></div>
+@if (!loading() && !error() && page()) {
+  <h1 [innerHTML]="page()?.title?.rendered"></h1>
+  <div [innerHTML]="page()?.content?.rendered"></div>
 }
-  
+
+@if (!loading() && !page() && !error()) {
+  <p>Contenu indisponible hors connexion.</p>
+}

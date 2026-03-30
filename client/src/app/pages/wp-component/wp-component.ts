@@ -31,6 +31,7 @@ export class WpComponent {
   }
   ngOnInit() {
     this.wp.loadBySlug(this.slug)
+    // console.log('Component initialized with slug:', this.slug);
   }
 
   getSlug(routerUrl: string) {

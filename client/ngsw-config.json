@@ -1,4 +1,7 @@
 {
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+
   "assetGroups": [
     {
       "name": "app",
@@ -16,15 +19,17 @@
     {
       "name": "assets",
       "installMode": "lazy",
-      "updateMode": "lazy",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/assets/**",
+          "!/assets/ping.txt",
           "/*.(png|jpg|jpeg|svg|webp)"
         ]
       }
     }
   ],
+
   "dataGroups": [
     {
       "name": "api",
@@ -33,17 +38,16 @@
       ],
       "cacheConfig": {
         "strategy": "freshness",
-        "maxSize": 100,
+        "maxSize": 50,
         "maxAge": "1h",
-        "timeout": "10s"
+        "timeout": "5s"
       }
     }
   ],
+
   "navigationUrls": [
     "/**",
     "!/**/*.*",
     "!/api/**"
   ]
-
-
 }

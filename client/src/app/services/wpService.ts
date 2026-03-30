@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
@@ -48,15 +48,18 @@ export class WpService {
   }
 
   private _setPage(slug: string) {
-    const errorMessage: string = `Page: ${slug} not found !`;
-    const pageContent: Page = this.allPages.filter((page: Page) => page.slug === slug)[0];
+    const pageContent = this.allPages.find(p => p.slug === slug);
+
     if (pageContent) {
       this.pageSubject.next(pageContent);
-      this.loadingSubject.next(false);
     } else {
-      this.errorSubject.next(errorMessage);
-      this.loadingSubject.next(false);
+      // IMPORTANT : ne pas bloquer le composant
+      this.pageSubject.next(null);
+      this.errorSubject.next(`Page ${slug} introuvable`);
     }
+
+    this.loadingSubject.next(false);
   }
+
 }
 

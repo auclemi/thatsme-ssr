@@ -25,3 +25,29 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Scripts Angular side
+start: ng serve  
+→ Lance l’application en mode développement (SPA/SSR selon configuration).
+
+build: ng build  
+→ Build de la version client (SPA).
+
+build:production: ng build --configuration production  
+→ Build production (same as build if defaultConfiguration on angular.json is 'production')
+
+serve:ssr: node dist/thatsme-angular/server/server.mjs  
+→ Lance l’application en mode SSR (production) sur le port 80.
+
+## Scripts Nest side
+start: nest start
+→ Lance le serveur NestJS en mode développement (sans watch).
+
+start:dev: nest start --watch
+→ Lance le serveur NestJS en mode développement avec rechargement automatique.
+
+build: nest build
+→ Compile le projet NestJS en production dans le dossier dist/.
+
+start:prod: node dist/main.js
+→ Lance le serveur NestJS compilé (mode production).

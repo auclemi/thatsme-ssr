@@ -1,0 +1,1 @@
+This file is fetched on startup to check if we are offline

@@ -17,7 +17,7 @@ export interface ContactPayload {
 export class ContactService {
   
   private stateSubject = new BehaviorSubject<string>('INITIAL');
-  private readonly apiUrl = `${environment.apiUrl}/api/contact`;
+  private readonly apiUrl = `${environment.apiUrl}/contact`;
 // Expose as observables for component signals
   state$ = this.stateSubject.asObservable();
   

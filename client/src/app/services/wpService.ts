@@ -23,7 +23,7 @@ export class WpService {
   error$ = this.errorSubject.asObservable();
 
   // readonly apiUrl = 'mock/wp-allpages.json';
-  readonly apiUrl = `${environment.apiUrl}/api/wp-pages`;
+  readonly apiUrl = `${environment.apiUrl}/wp-pages`;
 
   constructor(private http: HttpClient) { }
 

@@ -51,3 +51,20 @@ build: nest build
 
 start:prod: node dist/main.js
 → Lance le serveur NestJS compilé (mode production).
+
+# Caddy
+## Caddyfile
+thatsme.freeboxos.fr {
+    reverse_proxy /api/* localhost:3000
+    reverse_proxy localhost:4000
+}
+
+## Démarrage Caddy
+cd \caddy
+.\caddy_windows_amd64.exe run --config .\Caddyfile
+ou
+.\caddy.exe run --config .\Caddyfile
+
+## kill Caddy
+taskkill /IM caddy_windows_amd64.exe /F
+

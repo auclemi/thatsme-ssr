@@ -3,12 +3,26 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WpPagesModule } from './wp-pages/wp-pages.module';
 import { PingModule } from './ping/ping.module';
-import { Injectable, NestMiddleware } from '@nestjs/common';
 import { LoggerMiddleware } from './logger.middleware';
+import { ContactModule } from './contact/contact.module';
+
+import { ConfigModule } from '@nestjs/config';
+import * as path from 'path';
 
 @Module({
   imports: [
-    WpPagesModule, PingModule
+    // 🔥 Charge le .env en dev ET en prod
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [
+        path.join(process.cwd(), 'server', '.env'), // dev
+        path.join(__dirname, '..', '.env'),         // prod (dist/server/.env)
+      ],
+    }),
+
+    WpPagesModule,
+    PingModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],

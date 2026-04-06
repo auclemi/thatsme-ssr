@@ -28,11 +28,14 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/icons"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              { "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css" },
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+              },
               "src/material-theme.scss",
               "src/styles-colors.scss",
               "src/styles.scss"
@@ -48,6 +51,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",

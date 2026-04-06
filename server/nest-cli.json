@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "assets": [
+      {
+        "include": ".env",
+        "outDir": "./dist/server"
+      }
+    ]
   },
   "sourceRoot": "src"
 }

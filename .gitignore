@@ -17,6 +17,7 @@ client/.cache
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+log-contact.json
 
 # --- OS files ---
 .DS_Store

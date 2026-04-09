@@ -20,11 +20,14 @@
   gap: 0.1em;
   
 }
+// Unicode character for checkmark (✓) with green color
 .list-ok li::before {
-    content: "✔️"; 
-    margin-right: 0.5em;
-    flex-shrink: 0;
-    font-family: '-apple-system', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  content: "\2714";
+  color: #198754;
+  margin-right: 0.3rem;
+  flex-shrink: 0;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 .custom-shadow {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.50) ;
@@ -39,7 +42,6 @@ body,
 
 body a {
   color: $link-color;
-  text-decoration: none;
   :hover {
     text-decoration: underline;
   }

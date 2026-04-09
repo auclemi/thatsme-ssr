@@ -13,26 +13,28 @@ export interface ContactPayload {
 @Injectable({
   providedIn: 'root'
 })
-
 export class ContactService {
-  
-  private stateSubject = new BehaviorSubject<string>('INITIAL');
-  private readonly apiUrl = `${environment.apiUrl}/contact`;
-// Expose as observables for component signals
+
+  private stateSubject = new BehaviorSubject<'INITIAL' | 'LOADING' | 'DONE' | 'ERROR'>('INITIAL');
   state$ = this.stateSubject.asObservable();
-  
+
+  private readonly apiUrl = `${environment.apiUrl}/contact`;
+
   constructor(private http: HttpClient) {}
 
-  
-  sendContact(payload: any):void  { 
-    this.stateSubject.next('LOADING');
-      this.http.post(this.apiUrl, payload).pipe(
-            catchError(err => {
-              this.stateSubject.next('ERROR');
-              throw err;
-            }),
-          ).subscribe(
-            () => this.stateSubject.next('DONE')
-          );
+  setState(state: 'INITIAL' | 'LOADING' | 'DONE' | 'ERROR') {
+    this.stateSubject.next(state);
+  }
+
+  sendContact(payload: any): void {
+    this.setState('LOADING');
+
+    this.http.post(this.apiUrl, payload).pipe(
+      tap(() => this.setState('DONE')),
+      catchError(err => {
+        this.setState('ERROR');
+        throw err;
+      })
+    ).subscribe();
   }
 }

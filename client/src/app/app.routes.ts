@@ -9,6 +9,13 @@ export const routes: Routes = [
     data: { animation: 'HomePage' }
   },
   {
+    path: 'prestations-web',
+    loadComponent: () =>
+      import('./pages/prestations-web/prestations-web.component').then(m => m.PrestationsWebComponent),
+    data: { animation: 'PrestationsWebComponent' }
+
+  },
+  {
     path: 'developpement-front-end-angular',
     loadComponent: () =>
       import('./pages/wp-component/wp-component').then(m => m.WpComponent),

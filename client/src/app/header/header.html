@@ -16,15 +16,19 @@
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-white" routerLink="/prestations-web">Prestations Web</a>
+                                <a class="nav-link text-white" routerLink="/prestations-web" [class.cur-menu]="curPage === '/prestations-web'">
+                                    Prestations Web
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" routerLink="/contact">Contact</a>
+                                <a class="nav-link text-white" routerLink="/contact" [class.cur-menu]="curPage === '/contact'">
+                                    Contact
+                                </a>
                             </li>
                         </ul>
                     </div>
-                    </div>
                 </div>
+            </div>
         </nav>
     </div>
 </div>

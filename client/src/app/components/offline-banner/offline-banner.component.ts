@@ -7,11 +7,7 @@ import { NetworkService } from './network.service';
   selector: 'app-offline-banner',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div *ngIf="network.offline()" class="offline-banner">
-      Vous êtes hors connexion
-    </div>
-  `,
+  templateUrl: './offline-banner.component.html',
   styles: [`
     .offline-banner {
       position: fixed;

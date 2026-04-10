@@ -14,10 +14,9 @@ import * as path from 'path';
     // 🔥 Charge le .env en dev ET en prod
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [
-        path.join(process.cwd(), 'server', '.env'), // dev
-        path.join(__dirname, '..', '.env'),         // prod (dist/server/.env)
-      ],
+       envFilePath: process.env.NODE_ENV === 'production'
+    ? '.env.production'
+    : '.env',
     }),
 
     WpPagesModule,

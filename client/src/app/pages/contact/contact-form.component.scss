@@ -1,11 +1,14 @@
-mat-card {
-  max-width: 480px;
-}
+:host {
+  mat-card {
+    max-width: 480px;
+  }
 
 
-form {
-  max-width: 480px;
-}
-mat-form-field {
-  width: 100%;
+  form {
+    max-width: 480px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
 }

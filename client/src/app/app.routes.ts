@@ -54,9 +54,9 @@ export const routes: Routes = [
   },
   //   { path: 'admin-logs', component: AdminLogsComponent },
 
-  // {
-  //     path: 'admin-logs',
-  //     loadComponent: () =>
-  //       import('./admin-logs/admin-logs').then(m => m.AdminLogsComponent)
-  //   },
+  {
+      path: 'admin-logs',
+      loadComponent: () =>
+        import('./admin-logs/admin-logs').then(m => m.AdminLogsComponent)
+    }
 ]

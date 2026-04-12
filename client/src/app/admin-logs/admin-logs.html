@@ -1,0 +1,20 @@
+<h1>Admin Logs</h1>
+
+<form [formGroup]="adminForm" class="d-flex flex-column w-50">
+    <mat-form-field appearance="outline">
+        <mat-label>Utilisateur</mat-label>
+        <input matInput formControlName="user" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="pass" type="password" autocomplete="new-password">
+    </mat-form-field>
+</form>
+
+<button mat-raised-button color="primary" (click)="getLogs()">Voir les logs</button>
+<button mat-stroked-button color="warn" class="ms-3" (click)="deleteLogs()">Supprimer les logs</button>
+<br><br><br>
+@if (output()) {
+<textarea [value]="output()" rows="20" style="width:100%"></textarea>
+}

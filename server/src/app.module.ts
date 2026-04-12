@@ -5,6 +5,7 @@ import { WpPagesModule } from './wp-pages/wp-pages.module';
 import { PingModule } from './ping/ping.module';
 import { LoggerMiddleware } from './logger.middleware';
 import { ContactModule } from './contact/contact.module';
+import { AdminModule } from './admin/admin.module';
 
 import { ConfigModule } from '@nestjs/config';
 import * as path from 'path';
@@ -22,6 +23,7 @@ import * as path from 'path';
     WpPagesModule,
     PingModule,
     ContactModule,
+    AdminModule
   ],
   controllers: [AppController],
   providers: [AppService],

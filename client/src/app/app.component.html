@@ -1,6 +1,15 @@
 <app-offline-banner />
-<app-header></app-header>
-<div id="main-content" class="container mt-5" [@routeAnimations]="getRouteAnimationData()">
+<app-header class="sticky-top"></app-header>
+<div id="main-content" name="main-content" tabindex="-1" class="container mt-5"
+  [@routeAnimations]="getRouteAnimationData()">
   <router-outlet></router-outlet>
+
+  <div class="text-end">
+    <a href="#" id="link-top" (click)="goToTop($event)">
+      Haut de la page
+    </a>
+  </div>
+
 </div>
+
 <app-footer class="header-background-color"></app-footer>

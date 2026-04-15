@@ -5,30 +5,35 @@
 
 /* You can add global styles to this file, and also import other style files */
 @import "styles-colors.scss";
-
+body {
+  // fixes header sticky not working after several scrolls
+  height: auto;
+}
 .header-background-color {
     background-color: $background-color;
 }
 .list-ok {
-  list-style: none;
+  // list-style: none;
   padding-left: 0;
-	margin-left: 0;
+	margin-left: 1.1rem;
 }
-.list-ok li {
-	display: flex;
-  align-items: flex-start;
-  gap: 0.1em;
+//Remove fancy list for now, as it causes issues with screen readers who says text, checked
+// .list-ok li {
+	// display: flex;
+  // align-items: flex-start;
+  // gap: 0.1em;
   
-}
+// }
 // Unicode character for checkmark (✓) with green color
-.list-ok li::before {
-  content: "\2714";
-  color: #198754;
-  margin-right: 0.3rem;
-  flex-shrink: 0;
-  font-weight: bold;
-  font-size: 1.2em;
-}
+// .list-ok li::before {
+  // content: "\2714";
+  // color: #198754;
+  // margin-right: 0.3rem;
+  // flex-shrink: 0;
+  // font-weight: bold;
+  // font-size: 1.2em;
+// }
+
 .custom-shadow {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.50) ;
 }
@@ -64,6 +69,21 @@ h3 {
     font-size: 1.7rem;
     font-weight: bold;
 }
+
+/* Supprime l'outline par défaut */
+// :focus {
+//   outline: none;
+// }
+
+// /* Focus visible uniquement pour clavier (pas pour clic souris) */
+// [name="main-content"]:focus-visible {
+//   // outline: 3px solid #ffcc00; /* jaune Datsmi */
+//   outline: 3px solid #198754; /* jaune Datsmi */
+  
+//   outline-offset: 4px;
+//   border-radius: 4px;
+//   transition: outline-offset 0.1s ease;
+// }
 
 
 /* Page Transition Animations */

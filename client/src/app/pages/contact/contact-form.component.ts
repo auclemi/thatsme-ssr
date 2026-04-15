@@ -4,10 +4,11 @@ import { ContactService } from './contact.service';
 import { MaterialFullModule } from '../../shared/material/material-module';
 import { ErrorComponent } from "../../components/error/error.component";
 import { toSignal } from '@angular/core/rxjs-interop';
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
-  imports: [ReactiveFormsModule, MaterialFullModule, ErrorComponent],
+  imports: [ReactiveFormsModule, MaterialFullModule, ErrorComponent, JsonPipe],
   styleUrl: './contact-form.component.scss',
   standalone: true,
 })
@@ -15,6 +16,7 @@ export class ContactFormComponent {
   contactForm: FormGroup;
   successMessage: string | null = null;
   errorMessage: string | null = null;
+  isFormError = false;
   public contactState;
 
   constructor(
@@ -33,7 +35,16 @@ export class ContactFormComponent {
     this.contactService.setState('INITIAL');
   }
   submit() {
-    if (this.contactForm.invalid || this.contactState() !== 'INITIAL') return;
+    if (this.contactState() !== 'INITIAL') return;
+    // validation message for accessibility, only for screenreaders
+    this.isFormError = false;
+    if (this.contactForm?.invalid ) {
+      setTimeout(() => {
+        this.isFormError = true;
+      }, 100);
+      return;
+    }
+    // sends the actual mail
     this.contactService.sendContact(this.contactForm.value)
 
   }

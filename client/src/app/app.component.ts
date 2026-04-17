@@ -4,7 +4,7 @@ import { Header } from './header/header';
 import { Footer } from './footer/footer';
 import { OfflineBannerComponent } from './components/offline-banner/offline-banner.component';
 import { routeTransitionAnimations } from './app.animations';
-import { SkiplinkService } from './services/skiplink.service';
+import { UtilityService } from './services/utility.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent {
   @ViewChild(RouterOutlet) outlet!: RouterOutlet;
   constructor(
     private router: Router,
-    private skiplinkService: SkiplinkService
+    private utilityService: UtilityService
   ) { }
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -28,7 +28,7 @@ export class AppComponent {
         // avoid focus after page load (goal is not to display the not nice frame)
         if (!this.firstNavigation) {
           // console.log('Route changée :', event.urlAfterRedirects, event);
-          this.skiplinkService.gotoMainContent();
+          this.utilityService.gotoMainContent();
         }
         this.firstNavigation = false;
       }
@@ -41,6 +41,6 @@ export class AppComponent {
   goToTop(event: Event) {
     event.preventDefault();
     // console.log('Go to top clicked');
-    this.skiplinkService.gotoMainContent();
+    this.utilityService.gotoMainContent();
   }
 }

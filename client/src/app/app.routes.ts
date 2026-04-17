@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-// import { AdminLogsComponent } from './admin-logs/admin-logs';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
@@ -52,8 +51,12 @@ export const routes: Routes = [
       import('./pages/contact/contact-form.component').then(m => m.ContactFormComponent),
     data: { animation: 'ContactFormComponent' }
   },
-  //   { path: 'admin-logs', component: AdminLogsComponent },
-
+  {
+    path: 'accessibilite',
+    loadComponent: () =>
+      import('./pages/accessibilite/accessibilite.component').then(m => m.AccessibiliteComponent),
+    data: { animation: 'AccessibiliteComponent' }
+  },
   {
       path: 'admin-logs',
       loadComponent: () =>

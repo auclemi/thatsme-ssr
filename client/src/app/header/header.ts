@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SkiplinkService } from '../services/skiplink.service';
+import { UtilityService } from '../services/utility.service';
 
 
 
@@ -16,20 +15,9 @@ import { SkiplinkService } from '../services/skiplink.service';
 })
 
 export class Header {
-  curPage = '';
   constructor(
-    private router: Router,
-    private skiplinkService: SkiplinkService
-  ) {
-    this.router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-      )
-      .subscribe(event => {
-        // console.log('Route changée :', event.urlAfterRedirects);
-        this.curPage = event.urlAfterRedirects;
-      });
-  }
+    public utilityService: UtilityService
+  ) {}
 
   /**
    * jumps to main-content anchor and focus on it
@@ -37,6 +25,6 @@ export class Header {
    */
   public doSkipLink(event: Event) {
     event.preventDefault();
-    this.skiplinkService.gotoMainContent();
+    this.utilityService.gotoMainContent();
   }
 }

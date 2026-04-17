@@ -1,0 +1,15 @@
+:host {
+    @import "../../styles-colors.scss";
+    background-color: $background-color;
+    color: #FFF;
+    padding: 1rem;
+
+    a {
+        text-decoration: none;
+        color: #FFF
+    }
+
+    .title {
+        color: #9BE5B3
+    }
+}

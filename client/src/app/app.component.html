@@ -1,15 +1,16 @@
 <app-offline-banner />
-<app-header class="sticky-top"></app-header>
-<div id="main-content" name="main-content" tabindex="-1" class="container mt-5"
-  [@routeAnimations]="getRouteAnimationData()">
-  <router-outlet></router-outlet>
+<div class="d-flex  flex-column min-vh-100">
+  <app-header class="sticky-top"></app-header>
 
-  <div class="text-end">
-    <a href="#" id="link-top" (click)="goToTop($event)">
-      Haut de la page
-    </a>
+  <div id="main-content" name="main-content" tabindex="-1" class="container mt-3 flex-grow-1"
+    [@routeAnimations]="getRouteAnimationData()">
+    <router-outlet></router-outlet>
+    
   </div>
-
+<div class="container text-end mb-2 mt-2">
+      <a href="#" id="link-top" (click)="goToTop($event)">
+        Haut de la page
+      </a>
+    </div>
+  <app-footer id="footer"></app-footer>
 </div>
-
-<app-footer class="header-background-color"></app-footer>

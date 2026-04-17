@@ -1,46 +1,44 @@
-<div class="header-background-color">
-<a href="#" class="skip-link visually-hidden" (click)="doSkipLink($event)">Vers contenu principal</a>
+<div class="header">
+    <a href="#" class="skip-link visually-hidden text-black" (click)="doSkipLink($event)">Vers contenu principal</a>
     <div class="container">
         <nav class="navbar navbar-expand header-background-color sticky-top">
-            <!-- <div class="d-flex flex-wrap align-items-center"> -->
-                <div class="d-flex align-items-center">
-                    <div aria-hidden="true">
-                        <a routerLink="/home">
-                            <img src="/assets/images/thatsME.png" alt="That's Me Logo" width="100" />
-                        </a>
-                    </div>
-                    <div>
-                        <div class="text-white">
-                            <div class="brand title">
-                                <span aria-hidden="true">That's Me !</span>
-                                <span class="visually-hidden">
-                                    DatsMi!, votre expert en développement web,
-                                </span>
-                            </div>
-                        </div>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" routerLink="/home"
-                                    [class.cur-menu]="curPage === '/home'">
-                                    Accueil
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" routerLink="/prestations-web"
-                                    [class.cur-menu]="curPage === '/prestations-web'">
-                                    Prestations Web
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" routerLink="/contact"
-                                    [class.cur-menu]="curPage === '/contact'">
-                                    Contact
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="d-flex align-items-center">
+                <div aria-hidden="true">
+                    <a routerLink="/home">
+                        <img src="/assets/images/thatsME.png" alt="That's Me Logo" width="100" />
+                    </a>
                 </div>
-            <!-- </div> -->
+                <div>
+                    <div class="text-white">
+                        <div class="brand title">
+                            <span aria-hidden="true">That's Me !</span>
+                            <span class="visually-hidden">
+                                DatsMi!, votre expert en développement web,
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" routerLink="/home"
+                                [class.cur-menu]="utilityService.curPage() === '/home'">
+                                Accueil
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" routerLink="/prestations-web"
+                                [class.cur-menu]="utilityService.curPage() === '/prestations-web'">
+                                Prestations Web
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" routerLink="/contact"
+                                [class.cur-menu]="utilityService.curPage() === '/contact'">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </div>
 </div>

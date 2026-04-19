@@ -5,6 +5,7 @@ import { MaterialFullModule } from '../../shared/material/material-module';
 import { ErrorComponent } from "../../components/error/error.component";
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
+
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',

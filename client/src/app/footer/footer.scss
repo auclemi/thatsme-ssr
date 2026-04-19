@@ -2,7 +2,7 @@
     @import "../../styles-colors.scss";
     background-color: $background-color;
     color: #FFF;
-    padding: 1rem;
+    padding: 0.5rem;
 
     a {
         text-decoration: none;
@@ -10,6 +10,6 @@
     }
 
     .title {
-        color: #9BE5B3
+        color: #000;// #cae2d1
     }
 }

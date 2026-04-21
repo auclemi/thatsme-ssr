@@ -57,6 +57,12 @@ export const routes: Routes = [
       import('./pages/accessibilite/accessibilite.component').then(m => m.AccessibiliteComponent),
     data: { animation: 'AccessibiliteComponent' }
   },
+   {
+    path: 'stats',
+    loadComponent: () =>
+      import('./pages/stats/stats.component').then(m => m.StatsComponent),
+    data: { animation: 'StatsComponent' }
+  },
   {
       path: 'admin-logs',
       loadComponent: () =>

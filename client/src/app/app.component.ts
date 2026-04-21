@@ -23,6 +23,12 @@ export class AppComponent {
     private utilityService: UtilityService
   ) { }
   ngOnInit() {
+    if (typeof window !== 'undefined') {
+    const script = document.createElement('script');
+    script.src = '/assets/stats.js';
+    script.defer = true;
+    document.body.appendChild(script);
+  }
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // avoid focus after page load (goal is not to display the not nice frame)

@@ -6,6 +6,7 @@ import { PingModule } from './ping/ping.module';
 import { LoggerMiddleware } from './logger.middleware';
 import { ContactModule } from './contact/contact.module';
 import { AdminModule } from './admin/admin.module';
+import { StatsModule } from './stats/stats.module';
 
 import { ConfigModule } from '@nestjs/config';
 import * as path from 'path';
@@ -23,7 +24,8 @@ import * as path from 'path';
     WpPagesModule,
     PingModule,
     ContactModule,
-    AdminModule
+    AdminModule,
+    StatsModule
   ],
   controllers: [AppController],
   providers: [AppService],

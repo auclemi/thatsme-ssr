@@ -1,17 +1,16 @@
-
 (function () {
- if (window.__STATS_SCRIPT_LOADED__) {
-  console.log('STATS déjà chargé → on ignore');
-  return;
-}
-window.__STATS_SCRIPT_LOADED__ = true;
-    // Ne pas exécuter côté serveur (SSR)
+  if (window.__STATS_SCRIPT_LOADED__) return;
+  window.__STATS_SCRIPT_LOADED__ = true;
+
   if (typeof window === 'undefined') return;
 
-  const endpoint =
-    location.hostname === 'localhost'
-      ? 'http://localhost:3000/api/stats'
-      : '/api/stats';
+  const isDev =
+    location.hostname === 'localhost' &&
+    (location.port === '4200' || location.port === '4201');
+
+  const endpoint = isDev
+    ? 'http://localhost:3000/api/stats'
+    : '/api/stats';
 
   let uid = localStorage.getItem('visitor_id');
   if (!uid) {
@@ -24,22 +23,29 @@ window.__STATS_SCRIPT_LOADED__ = true;
   function sendStats() {
     const path = window.location.pathname;
 
+    // Sécurité : si path est vide → on ne fait rien
+    if (!path) return;
+
     if (path === lastPath) return;
     lastPath = path;
+
+    const payload = {
+      uid,
+      path,
+      ts: Date.now()
+    };
+
+    console.log("STATS →", payload);
 
     fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        uid,
-        path,
-        ts: Date.now()
-      })
+      body: JSON.stringify(payload)
     }).catch(() => {});
   }
 
-  // Envoi initial
-  sendStats();
+  // Envoi initial après un petit délai (Angular doit avoir chargé la route)
+  setTimeout(sendStats, 50);
 
   // Watcher d’URL
   setInterval(sendStats, 100);

@@ -6,8 +6,11 @@ import { StatsService } from './stats.service';
 export class StatsController {
     constructor(private stats: StatsService) { }
 
+
     @Post('api/stats')
+    
     log(@Body() data: any) {
+        // console.log('📩 BODY REÇU =', data);
         const backlist = ['/stats'];
         if (!backlist.includes(data.path)) {
             this.stats.add(data);

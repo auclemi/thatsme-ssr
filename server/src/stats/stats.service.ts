@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
-import * as path from 'path';
+import { join } from 'path';
 
 @Injectable()
 export class StatsService {
-  private file = path.join(process.cwd(), 'stats.json');
+  private file = join(__dirname, '..', 'stats.json');
 
   private load() {
     if (!fs.existsSync(this.file)) return [];

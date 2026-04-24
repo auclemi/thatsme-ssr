@@ -1,38 +1,59 @@
-# ============================
-# BUILD FRONTEND (Angular SSR)
-# ============================
-# powershell -ExecutionPolicy Bypass -File build-fe.ps1
-$ErrorActionPreference = "Stop"
-Write-Host "Build Angular SSR"
+# ===============================
+#   BUILD FRONTEND — THAT'S ME
+# ===============================
 
-# Répertoires
-$DEV_FE = "C:\Users\AUCLERMI\projects\thatsme-ssr\client"
-$PROD_FE = "C:\Users\AUCLERMI\projects\thatsme-ssr-production\angular"
+Write-Host "=== BUILD FRONTEND (FE) ==="
 
-# Aller dans le dossier client
-Set-Location $DEV_FE
+# Dossiers DEV et PROD
+$devFePath  = "C:\Users\AUCLERMI\projects\thatsme-ssr\client"
+$prodFePath = "C:\Users\AUCLERMI\projects\thatsme-ssr-production\angular"
 
-# Build SSR
+Write-Host "DEV folder : $devFePath"
+Write-Host "PROD folder : $prodFePath"
+
+# 1) Nettoyage du dossier PROD FRONT
+Write-Host "PROD FRONT Clean-up..."
+if (Test-Path $prodFePath) {
+    Remove-Item $prodFePath -Recurse -Force
+}
+New-Item -ItemType Directory -Path $prodFePath | Out-Null
+
+# 2) Build Angular SSR dans DEV
+Write-Host "Building Angular SSR..."
+Set-Location $devFePath
+npm install
 npm run build:production
 
-# Stop PM2 pour libérer les fichiers
-pm2 stop thatsme-ssr -ErrorAction SilentlyContinue
+# 3) Copie vers PROD
+Write-Host "Copy frontend to PROD..."
+Copy-Item "$devFePath\package.json"        "$prodFePath\package.json"
+Copy-Item "$devFePath\package-lock.json"   "$prodFePath\package-lock.json"
+Copy-Item "$devFePath\dist"                "$prodFePath\dist" -Recurse -Force
 
 
-Write-Host "Nettoyage du dossier PROD Angular"
-if (Test-Path $PROD_FE) {
-    Remove-Item $PROD_FE -Recurse -Force
+# 4) Installation des dépendances en PROD
+Write-Host "Dependencies installation..."
+Set-Location $prodFePath
+npm install --omit=dev
+
+# 5) Vérification du process PM2
+Write-Host "PM2 processes check 'thatsme-front'..."
+$pm2List = pm2 list
+$exists  = $pm2List -match "thatsme-front"
+$online  = $pm2List -match "online"
+
+# 6) Start ou restart
+if (-not $exists -or -not $online) {
+    Write-Host "Process absent ou offline → START"
+    pm2 start dist/thatsme-angular/server/server.mjs --name thatsme-front
+} else {
+    Write-Host "Process online → RESTART"
+    pm2 restart thatsme-front
 }
 
-# Recréation du dossier PROD
-New-Item -ItemType Directory -Path $PROD_FE | Out-Null
+# 7) Sauvegarde PM2
+Write-Host "PM2 backup..."
+pm2 save
 
-Write-Host "Copie des fichiers Angular SSR vers PROD"
-Copy-Item "$DEV_FE\dist\thatsme-angular\browser" "$PROD_FE\browser" -Recurse
-Copy-Item "$DEV_FE\dist\thatsme-angular\server" "$PROD_FE\server" -Recurse
-
-Write-Host "FE deploye dans le dossier PROD"
-
-# Redémarrage du frontend sur port 4000
-pm2 restart "$PROD_FE\server\server.mjs" --name thatsme-ssr
-
+Write-Host "Frontend deployed and working =================================================================="
+Set-Location $devFePath

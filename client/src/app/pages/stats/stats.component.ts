@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Optional, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { isPlatformServer } from '@angular/common';
 
 interface StatEntry {
   uid: string;
@@ -22,12 +23,19 @@ export class StatsComponent implements OnInit {
   stats: StatEntry[] = [];
   loading = true;
   error = false;
+  apiUrl: string;
 
+constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Optional() @Inject('API_URL') private serverApiUrl: string
+  ) {
+    const base = isPlatformServer(this.platformId)
+      ? `${this.serverApiUrl || 'http://localhost:3100'}/api`
+      : environment.apiUrl;
+    this.apiUrl = `${base}/stats`;
+  }
   ngOnInit() {
-    // SSR-safe : on ne fait l'appel que côté navigateur
-    if (typeof window === 'undefined') return;
-
-    this.http.get<StatEntry[]>(environment.apiUrl + '/stats').subscribe({
+    this.http.get<StatEntry[]>(this.apiUrl).subscribe({
       next: (data) => {
         // tri du plus récent au plus ancien
         this.stats = data.sort((a, b) => b.ts - a.ts);
@@ -44,4 +52,3 @@ export class StatsComponent implements OnInit {
     return new Date(ts).toLocaleString('fr-FR');
   }
 }
-

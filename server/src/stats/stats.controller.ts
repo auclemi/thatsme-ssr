@@ -8,19 +8,18 @@ export class StatsController {
 
 
     @Post('api/stats')
-    
-    log(@Body() data: any) {
+    async log(@Body() data: any) {
         // console.log('📩 BODY REÇU =', data);
-        const backlist = ['/stats'];
-        if (!backlist.includes(data.path)) {
-            this.stats.add(data);
+        const blacklist = ['/stats'];
+        if (!blacklist.includes(data.path)) {
+            await this.stats.add(data);
         }
         return { ok: true };
     }
 
-    @Get('stats')
-    view(@Res() res: Response) {
-        const data = this.stats.getAll();
+    @Get('stats-view') // Rename this so it doesn't conflict with /api/stats
+    async view(@Res() res: Response) {
+        const data = await this.stats.getAll();
 
         const html = `
       <h1>Stats simples</h1>
@@ -42,8 +41,8 @@ export class StatsController {
     }
 
     @Get('api/stats')
-    getStats() {
-        const data = this.stats.getAll();
+    async getStats() {
+        const data = await this.stats.getAll();
         return data;
     }
 }

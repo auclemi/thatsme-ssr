@@ -1,28 +1,34 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { readFileSync } from 'fs';
+import { Injectable, InternalServerErrorException, Logger, OnModuleInit } from '@nestjs/common';
+import * as fs from 'fs/promises';
 import { join } from 'path';
 
 @Injectable()
-export class WpPagesService {
-  private wpPages: any[];
+export class WpPagesService implements OnModuleInit {
+  private readonly logger = new Logger(WpPagesService.name);
+  private wpPages: any[] = [];
 
-  constructor() {
-    this.wpPages = this.loadJson('wp-allpages.json');
-    console.log('WpPagesService initialized with', this.wpPages.length, 'pages');
+  async onModuleInit() {
+    await this.loadData();
   }
 
-  private loadJson(file: string) {
+  private async loadData() {
     try {
-      const filePath = join(process.cwd(), 'data', file);
-      const content = readFileSync(filePath, 'utf8');
-      return JSON.parse(content);
-    } catch (error) {
-      throw new InternalServerErrorException(`Impossible de charger ${file}`);
+      const filePath = join(process.cwd(), 'data', 'wp-allpages.json');
+      const content = await fs.readFile(filePath, 'utf8');
+      this.wpPages = JSON.parse(content);
+      this.logger.log(`Successfully loaded ${this.wpPages.length} pages from JSON`);
+    } catch (error: any) {
+      this.logger.error(`Failed to load wp-allpages.json: ${error.message}`);
+      // Fallback to empty array to allow the app to start, 
+      // or keep the exception if the file is critical.
+      this.wpPages = [];
     }
   }
 
-  
   getWpPages() {
+    if (this.wpPages.length === 0) {
+      this.logger.warn('Request for WP pages received but cache is empty.');
+    }
     return this.wpPages;
   }
 }

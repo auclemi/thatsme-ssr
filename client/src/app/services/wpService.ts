@@ -1,10 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, Optional, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { isPlatformServer } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
 
 export interface Page {
   title: { rendered: string };
@@ -24,19 +23,18 @@ export class WpService {
   loading$ = this.loadingSubject.asObservable();
   error$ = this.errorSubject.asObservable();
 
-  // readonly apiUrl = 'mock/wp-allpages.json';
-  readonly apiUrl = `${environment.apiUrl}/wp-pages`;
+  readonly apiUrl: string;
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Optional() @Inject('API_URL') private serverApiUrl: string
   ) {
     const base = isPlatformServer(this.platformId)
-      ? 'http://localhost:3000/api'
+      ? `${this.serverApiUrl || 'http://localhost:3100'}/api`
       : environment.apiUrl;
     this.apiUrl = `${base}/wp-pages`;
   }
-
 
   loadBySlug(slug: string): void {
     this.loadingSubject.next(true);
@@ -73,4 +71,3 @@ export class WpService {
   }
 
 }
-

@@ -1,36 +1,59 @@
-# ============================
-# BUILD BACKEND (NestJS)
-# ============================
-$ErrorActionPreference = "Stop"
+# ===============================
+#   BUILD BACKEND — THAT'S ME
+# ===============================
 
-Write-Host "Build NestJS"
+Write-Host "=== BUILD BACKEND (BE) ==="
+Write-Host "PM2 STOP..."
+pm2 delete all
+pm2 kill
 
-# Répertoires
-$DEV_BE = "C:\Users\AUCLERMI\projects\thatsme-ssr\server"
-$PROD_BE = "C:\Users\AUCLERMI\projects\thatsme-ssr-production\api"
+# Dossiers DEV et PROD
+$devBePath  = "C:\Users\AUCLERMI\projects\thatsme-ssr\server"
+$prodBePath = "C:\Users\AUCLERMI\projects\thatsme-ssr-production\api"
 
-# Aller dans le dossier server
-Set-Location $DEV_BE
+Write-Host "DEV folder  : $devBePath"
+Write-Host "PROD folder: $prodBePath"
 
-# Build Nest
-npm run build
+# 1) Nettoyage du dossier PROD API
+Write-Host "PROD API clean-up..."
+if (Test-Path $prodBePath\dist) {
+    Remove-Item $prodBePath\dist -Recurse -Force
+}
+#New-Item -ItemType Directory -Path $prodBePath | Out-Null
 
-# Stop PM2 pour libérer les fichiers
-pm2 stop thatsme-api -ErrorAction SilentlyContinue
+# 2) Copie des fichiers backend DEV → PROD
+Write-Host "Copy backend to PROD..."
+Copy-Item "$devBePath\package.json"        "$prodBePath\package.json"
+Copy-Item "$devBePath\package-lock.json"   "$prodBePath\package-lock.json"
+Copy-Item "$devBePath\dist"                "$prodBePath\dist" -Recurse -Force
+Copy-Item "$devBePath\.env.production" "$prodBePath\.env" -Force
 
 
+# 3) Installation des dépendances dans le bon dossier
+Write-Host "Dependencies installation..."
+Set-Location $prodBePath
+npm install --omit=dev
 
-Write-Host "Nettoyage du dossier PROD API"
-if (Test-Path $PROD_BE\dist) {
-    Remove-Item $PROD_BE\dist -Recurse -Force
+# 4) Vérification du process PM2
+Write-Host "Checking PM2 processes'thatsme-api'..."
+$pm2List = pm2 list
+$exists  = $pm2List -match "thatsme-api"
+$online  = $pm2List -match "online"
+
+# 5) Start ou restart
+if (-not $exists -or -not $online) {
+    Write-Host "Process absent ou offline → START"
+    pm2 start dist/main.js --name thatsme-api
+} else {
+    Write-Host "Process online → RESTART"
+    pm2 restart thatsme-api
 }
 
+# 6) Sauvegarde de l'état PM2
+Write-Host "PM2 backup..."
+pm2 save
 
-Write-Host "Copie du backend vers PROD"
-Copy-Item "$DEV_BE\dist" "$PROD_BE\dist" -Recurse
+Write-Host "Backend deployed and working ================================================="
 
-Write-Host "BE deploye dans le dossier PROD"
-
-# Redémarrage de PM2
-pm2 restart "$PROD_BE\dist\main.js" --name thatsme-api
-Write-Host "BE tourne sur le port 3000"
+# Retour au dossier initial
+Set-Location $devBePath

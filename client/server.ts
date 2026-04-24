@@ -12,9 +12,16 @@ export function app(): express.Express {
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
+
+  // Use an environment variable for the API target, falling back to production port 3000
+  const apiTarget = process.env['API_TARGET'] || 'http://localhost:3000';
+  console.log(`Proxying API requests to: ${apiTarget}`);
   server.use('/api', createProxyMiddleware({
-    target: 'http://localhost:3000',
+    target: apiTarget,
     changeOrigin: true,
+    pathRewrite: {
+      '^/api': '/api'
+    }
   }));
   const commonEngine = new CommonEngine();
 
@@ -41,7 +48,10 @@ export function app(): express.Express {
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+        providers: [
+          { provide: APP_BASE_HREF, useValue: baseUrl },
+          { provide: 'API_URL', useValue: apiTarget }
+        ],
       })
       .then((html) => res.send(html))
       .catch((err) => next(err));

@@ -9,7 +9,7 @@
     (location.port === '4200' || location.port === '4201');
 
   const endpoint = isDev
-    ? 'http://localhost:3000/api/stats'
+    ? 'http://localhost:3100/api/stats'
     : '/api/stats';
 
   let uid = localStorage.getItem('visitor_id');

@@ -9,6 +9,7 @@ import { AdminModule } from './admin/admin.module';
 import { StatsModule } from './stats/stats.module';
 
 import { ConfigModule } from '@nestjs/config';
+import { join } from 'path';
 import * as path from 'path';
 
 @Module({
@@ -17,8 +18,8 @@ import * as path from 'path';
     ConfigModule.forRoot({
       isGlobal: true,
        envFilePath: process.env.NODE_ENV === 'production'
-    ? '.env.production'
-    : '.env',
+        ? join(process.cwd(), '.env.production')
+        : join(process.cwd(), '.env'),
     }),
 
     WpPagesModule,

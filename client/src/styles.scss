@@ -9,10 +9,27 @@ body {
   // fixes header sticky not working after several scrolls
   height: auto;
 }
+/* Nav anchors styles [START]*/
+nav a {
+        text-decoration: none;
+        color: #FFF;
+    }
 
-.cur-menu {
-  font-weight: bold !important;
+nav a:hover {
+    text-decoration: underline ;
+    color: #FFF;
 }
+
+// highlight current page in header and footer
+a[aria-current="page"] {
+      font-weight: 700;
+      border-bottom: solid  3px #9BE5B3;
+      padding-bottom: 0;
+}
+a[aria-current="page"]:hover {
+     text-decoration: none;
+}
+/* Nav anchors styles [END]*/
 
 .list-ok {
   // list-style: none;

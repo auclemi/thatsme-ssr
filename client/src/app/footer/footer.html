@@ -4,11 +4,11 @@
   </div>
 
   <div class="col-12 col-md-6 d-flex justify-content-md-start gx-3" style="min-width:0;">
-    <div>
-      <a routerLink="/accessibilite" [class.cur-menu]="utilityService.curPage() === '/accessibilite'">
+    <nav>
+      <a routerLink="/accessibilite" [attr.aria-current]="utilityService.curPage() === '/accessibilite'  ? 'page' : null">
         Déclaration d'accessibilité
       </a>
-    </div>
+    </nav>
   </div>
 </div>
 

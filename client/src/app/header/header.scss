@@ -1,22 +1,11 @@
 :host {
-     @import "../../styles-colors.scss";
+    @import "../../styles-colors.scss";
     background-color: $background-color;
-    
-    color: #FFF;
 
-    a {
-        text-decoration: none;
-        :hover {
-            text-decoration: none;
-        }
-    }
+    color: #FFF;
 
     .title {
         color: #9BE5B3;
     }
 
-    a:hover {
-        text-decoration: underline;
-    }
-   
 }

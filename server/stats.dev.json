@@ -1,102 +1,37 @@
 [
   {
-    "uid": "nb6m0fqedos",
-    "path": "/home",
-    "ts": 1776929748529
-  },
-  {
-    "uid": "nb6m0fqedos",
-    "path": "/home",
-    "ts": 1776929750493
-  },
-  {
-    "uid": "nb6m0fqedos",
-    "path": "/prestations-web",
-    "ts": 1776929760356
-  },
-  {
-    "uid": "nb6m0fqedos",
-    "path": "/",
-    "ts": 1776929784402
-  },
-  {
-    "uid": "nb6m0fqedos",
-    "path": "/home",
-    "ts": 1776929784841
-  },
-  {
-    "uid": "nb6m0fqedos",
-    "path": "/prestations-web",
-    "ts": 1776929802182
-  },
-  {
-    "uid": "nb6m0fqedos",
+    "uid": "tzatsiki",
     "path": "/contact",
-    "ts": 1776929803724
+    "ts": 1777885931823
   },
   {
-    "uid": "dell-dev",
+    "uid": "tzatsiki",
     "path": "/home",
-    "ts": 1776929829124
+    "ts": 1777886325470
   },
   {
-    "uid": "dell-dev",
+    "uid": "tzatsiki",
+    "path": "/accessibility",
+    "ts": 1777886714466
+  },
+  {
+    "uid": "tzatsiki",
+    "path": "/accessibility",
+    "ts": 1777887287394
+  },
+  {
+    "uid": "tzatsiki",
     "path": "/home",
-    "ts": 1776931179366
-  },
-  {
-    "uid": "qng8cxolv2i",
-    "path": "/",
-    "ts": 1776931182897
-  },
-  {
-    "uid": "qng8cxolv2i",
-    "path": "/home",
-    "ts": 1776931182999
-  },
-  {
-    "uid": "qng8cxolv2i",
-    "path": "/contact",
-    "ts": 1776931197661
+    "ts": 1777904049700
   },
   {
     "uid": "dell-dev",
     "path": "/",
-    "ts": 1777014430356
+    "ts": 1777905291277
   },
   {
     "uid": "dell-dev",
     "path": "/home",
-    "ts": 1777014430609
-  },
-  {
-    "uid": "dell-dev",
-    "path": "/",
-    "ts": 1777014608272
-  },
-  {
-    "uid": "dell-dev",
-    "path": "/home",
-    "ts": 1777014609285
-  },
-  {
-    "uid": "dell-dev",
-    "path": "/contact",
-    "ts": 1777031923831
-  },
-  {
-    "uid": "dell-dev",
-    "path": "/contact",
-    "ts": 1777031987294
-  },
-  {
-    "uid": "dell-dev",
-    "path": "/contact",
-    "ts": 1777032046618
-  },
-  {
-    "uid": "dell-dev",
-    "path": "/",
-    "ts": 1777032050474
+    "ts": 1777905291416
   }
 ]

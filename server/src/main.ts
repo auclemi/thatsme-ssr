@@ -1,11 +1,29 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,        // supprime les champs non attendus
+      forbidNonWhitelisted: true, // bloque si champs inconnus
+      transform: true,        // transforme automatiquement en DTO
+    }),
+  );
+  // app.useGlobalPipes(new ValidationPipe());
 
   app.enableCors({
-    origin: ['http://localhost:4200', 'http://localhost:4000', 'http://localhost:4100', 'https://localhost:443', 'https://thatsme.freeboxos.fr', 'http://localhost:3000', 'http://localhost:3100'],
+    origin: [
+      'http://localhost:4200', 
+      'http://localhost:4000', 
+      'http://localhost:4100', 
+      'https://localhost:443', 
+      'https://thatsme.freeboxos.fr', 
+      'http://localhost:3000', 
+      'http://localhost:3100', 
+      'http://localhost:4321'
+    ],
     credentials: true,
   });
 
